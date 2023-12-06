@@ -1,0 +1,373 @@
+﻿@model PhamMinhNhut_DoAnWeb.Models.Product
+@{
+    ViewBag.Title = "detail";
+    Layout = "~/Views/Shared/_LayoutPage3.cshtml";
+
+}
+@{
+
+    string splideJsPath = "https://cdn.jsdelivr.net/npm/@splidejs/splide@3.0.8/dist/js/splide.min.js";
+}
+
+<script src="@Html.Raw(splideJsPath)"></script>
+@{
+    string splideCssPath = "https://cdn.jsdelivr.net/npm/@splidejs/splide@3.0.8/dist/css/splide.min.css";
+}
+
+<link rel="stylesheet" href="@splideCssPath">
+
+<h2>detail</h2>
+<link href="~/javasript/JavaScript.js" rel="stylesheet" />
+<link href="~/javasript/splidejs1.js" rel="stylesheet" />
+<link href="~/javasript/splider2.js" rel="stylesheet" />
+
+
+<script src="path-to-the-file/splide.min.js"></script>
+<style>
+    /* body{
+            background-color: #c894e0;
+            background-image: url("1.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            backdrop-filter: blur(10px);
+            background-color: rgba(0, 0, 0, 0.5);
+          } */
+
+
+    .container {
+        margin-top: 100px;
+        margin-bottom: 100px;
+    }
+
+    .carousel-inner img {
+        width: 100%;
+        height: 100%;
+    }
+
+    #custCarousel .carousel-indicators {
+        position: static;
+        margin-top: 20px;
+    }
+
+        #custCarousel .carousel-indicators > li {
+            width: 100px;
+        }
+
+        #custCarousel .carousel-indicators li img {
+            display: block;
+            opacity: 0.5;
+        }
+
+        #custCarousel .carousel-indicators li.active img {
+            opacity: 1;
+        }
+
+        #custCarousel .carousel-indicators li:hover img {
+            opacity: 0.75;
+        }
+
+    .carousel-item img {
+        width: 100%;
+    }
+    /* button----------------------------------------------------------------------- */
+    .button-48 {
+        width: 100%;
+        appearance: none;
+        background-color: #FFFFFF;
+        border-width: 0;
+        box-sizing: border-box;
+        color: #000000;
+        cursor: pointer;
+        display: inline-block;
+        font-family: Clarkson,Helvetica,sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        letter-spacing: 0;
+        line-height: 1em;
+        margin: 10px;
+        opacity: 1;
+        outline: 0;
+        padding: 1.5em 2.2em;
+        position: relative;
+        text-align: center;
+        text-decoration: none;
+        text-rendering: geometricprecision;
+        text-transform: uppercase;
+        transition: opacity 300ms cubic-bezier(.694, 0, 0.335, 1),background-color 100ms cubic-bezier(.694, 0, 0.335, 1),color 100ms cubic-bezier(.694, 0, 0.335, 1);
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: baseline;
+        white-space: nowrap;
+    }
+
+        .button-48:before {
+            animation: opacityFallbackOut .5s step-end forwards;
+            backface-visibility: hidden;
+            background-color: #EBEBEB;
+            clip-path: polygon(-1% 0, 0 0, -25% 100%, -1% 100%);
+            content: "";
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
+            transform: translateZ(0);
+            transition: clip-path .5s cubic-bezier(.165, 0.84, 0.44, 1), -webkit-clip-path .5s cubic-bezier(.165, 0.84, 0.44, 1);
+            width: 100%;
+        }
+
+        .button-48:hover:before {
+            animation: opacityFallbackIn 0s step-start forwards;
+            clip-path: polygon(0 0, 101% 0, 101% 101%, 0 101%);
+        }
+
+        .button-48:after {
+            background-color: #FFFFFF;
+        }
+
+        .button-48 span {
+            z-index: 1;
+            position: relative;
+        }
+    /* ---------------------------------------------------------------------- */
+
+    .box {
+        width: 100%;
+        height: 220px;
+        border-radius: 10px;
+        background-color: white;
+        /* margin: 20px; */
+        position: relative;
+        box-shadow: 0px 0px 15px background;
+        transition: 0.3s all ease-in-out;
+    }
+
+        .box:hover {
+            background: linear-gradient(130deg, #503bff 0%, #8293ff 100%);
+            box-shadow: none;
+        }
+
+    .boxContent {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 15px;
+    }
+
+    .icon {
+        color: #8293ff;
+        font-size: 48px;
+        padding: 15px;
+    }
+
+    .title {
+        font-size: 24px;
+        color: #8293ff;
+        font-weight: bold;
+        padding: 10px;
+    }
+
+    .desc {
+        color: #8293ff;
+        font-size: 18px;
+        height: 20%;
+    }
+
+    /* a {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+    } */
+
+    .box:hover .icon,
+    .box:hover .title,
+    .box:hover .desc {
+        color: white;
+        transition: 0.3s all ease-in-out;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var main = new Splide('#main-slider', {
+            type: 'fade',
+            heightRatio: 0.5,
+            pagination: false,
+            arrows: false,
+            cover: true,
+        });
+
+        var thumbnails = new Splide('#thumbnail-slider', {
+            rewind: true,
+            fixedWidth: 104,
+            fixedHeight: 58,
+            isNavigation: true,
+            gap: 10,
+            focus: 'center',
+            pagination: false,
+            cover: true,
+            dragMinThreshold: {
+                mouse: 4,
+                touch: 10,
+            },
+            breakpoints: {
+                640: {
+                    fixedWidth: 66,
+                    fixedHeight: 38,
+                },
+            },
+        });
+
+        main.sync(thumbnails);
+
+        main.mount();
+        thumbnails.mount();
+    });
+
+
+
+</script>
+<div class="container" style="max-width:1300px; height: 10000px;margin-top: 100px;">
+
+
+
+    <div class="row" style="margin-top: 10px;">
+        <div class="col  " style="width: 980px;height: 610px; backdrop-filter: blur(10px); /* Điều chỉnh độ mờ ở đây */
+        background-color: rgba(0, 0, 0, 0.5);">
+
+            <div id="main-slider" class="splide" style="width: 100%;height: 480px;margin: 10px 0px 00px 0px">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        @foreach (var item in Model.ProductImages)
+                        {
+                            <li class="splide__slide">
+                                <img src="~/Images/@item.ImageUrl" alt="">
+                            </li>
+                        }
+
+
+                        <!-- Thêm các slide khác nếu cần -->
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Thumbnail Slider -->
+            <div id="thumbnail-slider" class="splide">
+                <div class="splide__track" style="width: 100%;height: 100px;">
+                    <ul class="splide__list">
+                        @foreach (var item in Model.ProductImages)
+                        {
+                            <li class="splide__slide" style="width: 140px;height: 100px;">
+                                <img src="~/Images/@item.ImageUrl" alt="Thumb 1">
+                            </li>
+                        }
+
+
+
+
+
+
+
+
+                        <!-- Thêm các thumbnail khác nếu cần -->
+                    </ul>
+                </div>
+            </div>
+
+            <div class="infocar" style="margin-top: 40px;margin-bottom: 40px ;background-color: #000000; height: auto;">
+
+
+                <div style="width: 100%;background-color: #000000;height: 50px; border-bottom: 4px solid rgb(251, 255, 0);color: #FFFFFF;padding: 10px;display: flex;margin-bottom: 5px;"><i class="fas fa-warehouse" style="color: yellow;padding-right: 10px;"></i>Brand <p style="margin-left: auto;">@Model.Brand.BrandName</p></div>
+                <div style="width: 100%;background-color: #000000;height: 50px; border-bottom: 4px solid rgb(251, 255, 0);color: #FFFFFF;padding: 10px;display: flex;margin-bottom: 5px;"><i class="fas fa-car" style="color: yellow;padding-right: 10px;"></i>Body Type<p style="margin-left: auto;">@Model.BodyType</p></div>
+                <div style="width: 100%;background-color: #000000;height: 50px; border-bottom: 4px solid rgb(251, 255, 0);color: #FFFFFF;padding: 10px;display: flex;margin-bottom: 5px;"><i class="fas fa-paint-roller" style="color: yellow;padding-right: 10px;"></i>Body Color<p style="margin-left: auto;">@Model.BodyColor</p></div>
+                <div style="width: 100%;background-color: #000000;height: 50px; border-bottom: 4px solid rgb(251, 255, 0);color: #FFFFFF;padding: 10px;display: flex;margin-bottom: 5px;"><i class="fas fa-cogs" style="color: yellow;padding-right: 10px;"></i>Transmission Type<p style="margin-left: auto;">@Model.TransmissionType</p></div>
+                <div style="width: 100%;background-color: #000000;height: 50px; border-bottom: 4px solid rgb(251, 255, 0);color: #FFFFFF;padding: 10px;display: flex;margin-bottom: 5px;"><i class="fas fa-gas-pump" style="color: yellow;padding-right: 10px;"></i>Consumption<p style="margin-left: auto;">@Model.Consumption</p></div>
+                <div style="width: 100%;background-color: #000000;height: 50px; border-bottom: 4px solid rgb(251, 255, 0);color: #FFFFFF;padding: 10px;display: flex;margin-bottom: 5px;"><i class="fas fa-power-off" style="color: yellow;padding-right: 10px;"></i>Power<p style="margin-left: auto;">@Model.Power hp</p></div>
+                <div style="width: 100%;background-color: #000000;height: 50px; border-bottom: 4px solid rgb(251, 255, 0);color: #FFFFFF;padding: 10px;display: flex;margin-bottom: 5px;"><i class="fas fa-oil-can" style="color: yellow;padding-right: 10px;"></i>Fuel<p style="margin-left: auto;">@Model.Fuel</p></div>
+
+
+
+
+            </div>
+            <div class="row" style="background-color: #b6afaf; height: 200px;">
+
+                <div class="col bg-danger" style="padding: 0; border-radius: 10px;">
+                    <div class="box">
+                        <div class="boxContent">
+                            <i class="fa fa-microchip icon"></i>
+                            <h1 class="title">Money back guarantee</h1>
+                            <p class="desc"> If you don't fall in love with the vehicle, simply return it to us.</p>
+                        </div>
+                        <a href="#"></a>
+                    </div>
+                </div>
+                <div class="col bg-info" style="padding: 0; border-radius: 10px;">
+                    <div class="box">
+                        <div class="boxContent">
+                            <i class="fa fa-calendar icon"></i>
+                            <h1 class="title">Safe purchase</h1>
+                            <p class="desc">We guarantee the technical condition of every vehicle sold.</p>
+                        </div>
+                        <a href="#"></a>
+                    </div>
+                </div>
+                <div class="col bg-warning" style="padding: 0; border-radius: 10px;">
+                    <div class="box">
+                        <div class="boxContent">
+                            <i class="fa fa-podcast icon"></i>
+                            <h1 class="title">-month</h1>
+                            <p class="desc">In addition, with every car you receive an extended warranty.</p>
+                        </div>
+                        <a href="#"></a>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
+        <div class="col-3  " style="padding: 10px;">
+            <a href="~/home/detail/@Model.ProductID" style="width: 300px; background-color: #007BFF; color: #FFFFFF; border-radius: 15px; padding: 15px; text-align: center; display: inline-block; font-size: 16px;  "> BUY CAR ONLINE: <span style="font-size: 25px;">$223 000</span></a>
+            <div style="display: flex; align-items: center;margin: 10px 0 10px 0;border-bottom: 3px solid black; height: 100px;">
+                <img src="~/Images/AVATA.png" style="border-radius: 50px; width: 80px; height: 80px;" alt="">
+                <div style="display: flex; flex-direction: column; margin-left: 10px;">
+                    <h1 style="margin: 0;color: #FFFFFF;">FTG</h1>
+                    <p style="margin: 0;color: #FFFFFF;">sdfg</p>
+                </div>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: center; margin: 10px 0 10px 0; height: auto;">
+                <h1 style="font-size: 30px;color: #FFFFFF;">190******</h1>
+            </div>
+
+            <button class="button-48" role="button"><span class="text">CHAT VIA WHATSAPP</span></button>
+            <button class="button-48" role="button"><span class="text">MESSAGE TO DEALER</span></button>
+
+            <div style="background-color: #777575; display: flex; flex-direction: column; align-items: center; margin: 10px 0 10px 0; height: 475px;width: 300px; margin: 12px;">
+                <h1 style="font-size: 26px; color: yellow;padding: 20px 0 10px 0;">CONTACT</h1>
+
+
+                <input type="text" id="loanAmount" name="loanAmount" style="padding: 20px 10px 90px 10px; width: 250px;height: 50px;" placeholder="Your Message"><br>
+
+
+                <input type="text" id="interestRate" name="interestRate" style="padding: 10px;width: 250px;height: 50px;" placeholder="First Name, Last Name*"><br>
+
+
+                <input type="text" id="loanTerm" name="loanTerm" style="padding: 10px;width: 250px;height: 50px;" placeholder="Your Email"><br>
+
+
+                <input type="text" id="monthlyPayment" name="monthlyPayment" style="padding: 10px;width: 250px;height: 50px;" placeholder="Your Phone">
+                <a href="" style="margin: 15px;width: 190px; background-color: #007BFF; color: #FFFFFF; border-radius: 15px; padding: 10px; text-align: center; display: inline-block; font-size: 13px;  "> Send Message</a>
+
+            </div>
+
+
+
+        </div>
+    </div>
+</div>

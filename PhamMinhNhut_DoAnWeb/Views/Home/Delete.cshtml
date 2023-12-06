@@ -1,0 +1,209 @@
+﻿@model PhamMinhNhut_DoAnWeb.Models.Product
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutPage2.cshtml";
+}
+
+
+<h2>Delete</h2>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/css/Create.css")">
+</head>
+@using (Html.BeginForm("Delete", "Home", FormMethod.Post, new { enct = "multipart/dorm-data" }))
+{
+
+    <div id="msform">
+        <!-- progressbar -->
+        <ul id="progressbar">
+            <li class="active">Account Profiles</li>
+            <li>Car Profiles</li>
+
+        </ul>
+        <!-- fieldsets -->
+
+        <fieldset>
+
+
+            <h2 class="fs-title">Create your account</h2>
+            <h3 class="fs-subtitle">This is step 1</h3>
+            @*<input type="text" name="email" placeholder="Email" />
+                <input type="password" name="pass" placeholder="Password" />
+                <input type="password" name="cpass" placeholder="Confirm Password" />*@
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="ProductName">ProductID</label>
+                    @Html.TextBoxFor(row => row.ProductID, new { @class = "form-control", placeholder = "ProductID", Value = @Model.ProductID })
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="ProductName">ProductName</label>
+                    @Html.TextBoxFor(row => row.ProductName, new { @class = "form-control", placeholder = "ProductName", Value = @Model.ProductName })
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="BrandId">Hãng</label>
+                    @Html.TextBoxFor(row => row.BrandId, new { @class = "form-control", placeholder = "BrandId", Value = @Model.BrandId })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="BodyColor">BodyColor</label>
+                    @Html.TextBoxFor(row => row.BodyColor, new { @class = "form-control", placeholder = "BodyColor", Value = @Model.BodyColor })
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="BodyType">BodyType</label>
+                    @Html.TextBoxFor(row => row.BodyType, new { @class = "form-control", placeholder = "BodyType", Value = @Model.BodyType })
+
+                </div>
+            </div>
+
+            <input type="button" name="next" class="next action-button" value="Next" />
+        </fieldset>
+        <fieldset>
+            <h2 class="fs-title">Social Profiles</h2>
+            <h3 class="fs-subtitle">Your presence on the social network</h3>
+            @*<input type="text" name="twitter" placeholder="Twitter" />
+        <input type="text" name="facebook" placeholder="Facebook" />
+        <input type="text" name="gplus" placeholder="Google Plus" />*@
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="TransmissionType">TransmissionType</label>
+                    @Html.TextBoxFor(row => row.TransmissionType, new { @class = "form-control", placeholder = "TransmissionType", Value = @Model.TransmissionType })
+
+                </div>
+            </div><div class="row">
+                <div class="col-md-6">
+                    <label for="Consumption">Consumption</label>
+                    @Html.TextBoxFor(row => row.Consumption, new { @class = "form-control", placeholder = "Consumption", Value = @Model.Consumption })
+
+                </div>
+            </div><div class="row">
+                <div class="col-md-6">
+                    <label for="Power">Power</label>
+                    @Html.TextBoxFor(row => row.Power, new { @class = "form-control", placeholder = "Power", Value = @Model.Power })
+
+                </div>
+            </div><div class="row">
+                <div class="col-md-6">
+                    <label for="Price">Price</label>
+                    @Html.TextBoxFor(row => row.Price, new { @class = "form-control", placeholder = "Price", Value = @Model.Price })
+
+                </div>
+            </div><div class="row">
+                <div class="col-md-6">
+                    <label for="Fuel">Fuel</label>
+                    @Html.TextBoxFor(row => row.Fuel, new { @class = "form-control", placeholder = "Fuel", Value = @Model.Fuel })
+
+                </div>
+            </div>
+            <input type="button" name="previous" class="previous action-button" value="Previous" />
+           
+            <input type="submit" name="previous" class="previous action-button" value="Xóa" />
+            <a href="@Url.Action("DSSP")" class="btn btn-secondary">Hủy bỏ</a>
+
+        </fieldset>
+
+
+
+    </div>
+
+
+    <script>
+        //jQuery time
+        var current_fs, next_fs, previous_fs; //fieldsets
+        var left, opacity, scale; //fieldset properties which we will animate
+        var animating; //flag to prevent quick multi-click glitches
+
+        $(".next").click(function () {
+            if (animating) return false;
+            animating = true;
+
+            current_fs = $(this).parent();
+            next_fs = $(this).parent().next();
+
+            //activate next step on progressbar using the index of next_fs
+            $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+            //show the next fieldset
+            next_fs.show();
+            //hide the current fieldset with style
+            current_fs.animate(
+                { opacity: 0 },
+                {
+                    step: function (now, mx) {
+                        //as the opacity of current_fs reduces to 0 - stored in "now"
+                        //1. scale current_fs down to 80%
+                        scale = 1 - (1 - now) * 0.2;
+                        //2. bring next_fs from the right(50%)
+                        left = now * 50 + "%";
+                        //3. increase opacity of next_fs to 1 as it moves in
+                        opacity = 1 - now;
+                        current_fs.css({
+                            transform: "scale(" + scale + ")",
+                            position: "absolute"
+                        });
+                        next_fs.css({ left: left, opacity: opacity });
+                    },
+                    duration: 800,
+                    complete: function () {
+                        current_fs.hide();
+                        animating = false;
+                    },
+                    //this comes from the custom easing plugin
+                    easing: "easeInOutBack"
+                }
+            );
+        });
+
+        $(".previous").click(function () {
+            if (animating) return false;
+            animating = true;
+
+            current_fs = $(this).parent();
+            previous_fs = $(this).parent().prev();
+
+            //de-activate current step on progressbar
+            $("#progressbar li")
+                .eq($("fieldset").index(current_fs))
+                .removeClass("active");
+
+            //show the previous fieldset
+            previous_fs.show();
+            //hide the current fieldset with style
+            current_fs.animate(
+                { opacity: 0 },
+                {
+                    step: function (now, mx) {
+                        //as the opacity of current_fs reduces to 0 - stored in "now"
+                        //1. scale previous_fs from 80% to 100%
+                        scale = 0.8 + (1 - now) * 0.2;
+                        //2. take current_fs to the right(50%) - from 0%
+                        left = (1 - now) * 50 + "%";
+                        //3. increase opacity of previous_fs to 1 as it moves in
+                        opacity = 1 - now;
+                        current_fs.css({ left: left });
+                        previous_fs.css({
+                            transform: "scale(" + scale + ")",
+                            opacity: opacity
+                        });
+                    },
+                    duration: 800,
+                    complete: function () {
+                        current_fs.hide();
+                        animating = false;
+                    },
+                    //this comes from the custom easing plugin
+                    easing: "easeInOutBack"
+                }
+            );
+        });
+    </script>
+}

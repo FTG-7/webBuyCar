@@ -1,0 +1,342 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Thêm thư viện CSS Bootstrap từ Bootstrap CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Thêm thư viện JavaScript Bootstrap từ Bootstrap CDN (bao gồm jQuery) -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  
+
+    <style>
+        body {
+            background-color: #fdf4f4; /* Màu nền của trang web */
+
+            font-family: Arial, sans-serif; /* Phông chữ mặc định */
+            font-size: 16px; /* Kích thước phông chữ mặc định */
+            line-height: 1.6; /* Độ cao dòng mặc định */
+            margin: 0; /* Xóa khoảng trắng ngoại vi (margin) mặc định */
+            padding: 0; /* Xóa khoảng trắng bên trong (padding) mặc định */
+        }
+
+        /* Bất kỳ kiểu CSS khác cho phần body tại đây */
+        /*  */
+
+
+
+        .data-container {
+            background: #ffebee;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .col-md-2 {
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 16.666667%;
+            flex: 0 0 16.666667%;
+            max-width: 300px;
+            margin: 5px;
+        }
+
+
+        .nav-menu {
+            position: absolute;
+            z-index: 100;
+            left: 0;
+            right: 0;
+            width: 100%;
+            display: flex;
+            height: auto;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .nav-menu img {
+                margin-left: 40px;
+                width: 90px;
+                height: 90px;
+            }
+            /* .nav-menu img:hover{
+          transition: 0.5s ease-in-out;
+          transform: scale(1.1, 1.1);
+        } */
+
+            .nav-menu a {
+                color: white;
+                text-decoration: none;
+            }
+
+            /* .nav-menu a:hover {
+          color: orange;
+        }  */
+
+            .nav-menu ul {
+                display: flex;
+                list-style: none;
+            }
+
+                .nav-menu ul li {
+                    position: relative;
+                    text-align: center;
+                    padding: 14px 25px;
+                    transition: 0.5s;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                    /* .nav-menu ul li:hover {
+          color: orange;
+          transform: scale(1.3, 1.3);
+        }  */
+
+                    .nav-menu ul li > .sub_menu {
+                        position: absolute;
+                        top: 100%;
+                        left: 0;
+                        display: none;
+                    }
+
+                    .nav-menu ul li:hover > .sub_menu {
+                        display: block;
+                        color: white;
+                        background-color: black;
+                        border: 1px solid white;
+                        border-radius: 10px;
+                        font-size: 11px;
+                        font-weight: 200;
+                    }
+
+        .font-nav-menu {
+            font-size: 22px;
+            font-weight: 700;
+            margin: 10px 0 0 0;
+        }
+
+        .nav-menu.sticky {
+            position: sticky;
+            height: auto;
+            top: 0;
+            background-color: white;
+            opacity: 0.9;
+        }
+
+            .nav-menu.sticky ul li a {
+                color: black;
+            }
+
+            .nav-menu.sticky ul li > .sub_menu {
+                padding-top: 20px;
+                border-radius: 10;
+            }
+
+        .nav-menu.nav-menu.sticky ul li:hover > .sub_menu {
+            color: black;
+            background-color: white;
+            font-weight: 500;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(window).scroll(function () {
+                if ($(this).scrollTop()) {
+                    $('.nav-menu').addClass('sticky');
+                } else {
+                    $('.nav-menu').removeClass('sticky');
+                }
+            })
+        })
+    </script>
+
+    <title>Document</title>
+</head>
+<body>
+    @{    var userName = Context.Request.Cookies["auth"];
+        var Role = Context.Request.Cookies["role"];
+        }
+    <div class="nav-menu">
+        <a href="Trangchu.html">
+            <img src="img Banner/logo.png"></img>
+        </a>
+        <ul class="font-nav-menu">
+            <li><a href="/home" style="font-size:25px">Home</a></li>
+           
+            <li><a href="/Home/Product"style="font-size:25px">Danh sách xe</a></li>
+            <li>
+              
+            </li>
+
+            @if (userName != null)
+            {
+               
+                <li>
+                    Hello
+                    <span>@userName.Value </span>
+
+                </li>
+                <li>
+                    <a href="~/User/Logout"> <button type="button" class="btn btn-outline-danger m-2">Logout</button></a>
+
+                </li>
+            }
+            else
+            {
+                <li>
+                    <a href="~/User/Login"><button type="button" class="btn btn-outline-success m-2">Login</button></a>
+
+                </li>
+               
+            }
+
+        </ul>
+
+
+    </div>
+    <div class="container" style="max-width:1450px; height: auto; ">
+
+        @*<nav class="navbar navbar-expand-lg navbar-light" style="font-size: 20px; font-weight: bold; z-index: 1; position: absolute;">
+                <div class="container" style="margin-left: 140px; padding: 0px; display: flex; justify-content: space-between; align-items: center;">
+                    <a class="navbar-brand" href="#" style="color: rgb(255, 3, 3);">Logo</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/" style="padding: 20px; color: rgb(245, 244, 244);">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Home/Employees" style="padding: 20px; color: rgb(255, 255, 255);">Danh sách Nhân Viên</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Home/Deparment" style="padding: 20px; color: rgb(250, 250, 250);">Danh sách phòng ban</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Home/create" style="padding: 20px; color: rgb(255, 255, 255);">Thêm nhân viên</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>*@
+
+        @RenderBody()
+
+        @*<div class="triangle" style="left: 0;right: 0; position: absolute; border-right: 5000px solid transparent; border-bottom: 50px solid #00ff00; "></div>*@
+        <div class="list_utilities" style="margin-top: 50px; left: 0; right: 0; position: absolute; padding: 20px; flex-wrap: wrap; height: 500px;; display: flex; background-color: #f5f7fb; ">
+            <div class="utilities">
+                <div class="row" style="width: 500px; height: 300px; ">
+
+                    <img style=" padding: 0; position: absolute;  display: block; width: 490px;height: 300px; " src="~/Images/how-it-works-1-2x (1).jpg" alt="">
+
+                </div>
+                <div class="infothem" style=" width: 500px; margin-left: -15px;">
+                    <h1 style="margin-left: -20px;">Choose anywhere in Europe</h1>
+                    <p style="margin-left: -20px;">No more compromises! With us, you have an unrivaled selection of cars in one place.</p>
+                </div>
+
+            </div>
+            <div class="utilities">
+                <div class="row" style="width: 550px; height: 300px; ">
+
+                    <img style=" padding: 0; position: absolute; ; display: block; width: 490px;height: 300px; " src="~/Images/how-it-works-2-2x.jpg" alt="">
+
+                </div>
+                <div class="infothem" style=" width: 500px; margin-left: -15px;">
+                    <h1 style="margin-left: -10px;">We'll inspect the car closely</h1>
+                    <p>A certified machanic will thoroughly inspect your car. You will decide according ti the result after.</p>
+                </div>
+
+            </div>
+            <div class="utilities">
+                <div class="row" style="width: 550px; height: 300px;">
+
+                    <img style=" padding: 0; position: absolute; ; display: block; width: 490px;height: 300px; " src="~/Images/how-it-works-3-2x.jpg" alt="">
+
+                </div>
+                <div class="infothem" style=" width: 500px; margin-left: -15px;">
+                    <h1>We'll deliver it to your home</h1>
+                    <p>We arrange all the paperwork, registration and delivery. All you need to do is enjoy your new car.</p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+    <style>
+        .box {
+            width: 92.5px;
+            height: 255px;
+            transition: background-color 0.3s;
+            z-index: 1;
+            margin: 0;
+        }
+
+        .utilities {
+            width: 400px;
+            height: 330px;
+            /* display: flex; */
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+
+
+
+        .product {
+            width: auto;
+            height: 370px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+
+        .box:hover {
+            display: block;
+            z-index: 1;
+            border-bottom: 5px solid rgb(0, 26, 255);
+        }
+
+            .box:hover img {
+                display: block;
+                z-index: -1;
+            }
+
+        img {
+            display: none;
+        }
+
+        .custom-width {
+            width: auto;
+            padding: 0;
+        }
+
+
+        .info {
+            width: 370px;
+            height: 120px;
+            background-color: #373c3f;
+        }
+    </style>
+</body>
+</html>

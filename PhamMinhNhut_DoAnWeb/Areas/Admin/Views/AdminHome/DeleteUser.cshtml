@@ -1,0 +1,68 @@
+﻿@model PhamMinhNhut_DoAnWeb.Models.User
+
+@{
+    ViewBag.Title = "DeleteUser";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutPage2.cshtml";
+}
+
+<h2>DeleteUser</h2>
+
+
+@using (Html.BeginForm("DeleteUser", "AdminHome", FormMethod.Post))
+{
+    <input type="hidden" name="role" value="admin" />
+    <div class="container-fluid position-relative d-flex p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+        <!-- Sign In Start -->
+        <div class="container-fluid">
+            <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh; color:white">
+                <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+                    <div class="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <a href="index.html" class="">
+                                <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>DarkPan</h3>
+                            </a>
+                            <h3>Sign In</h3>
+                        </div>
+                        <div class="form-floating mb-3">
+                            @*@Html.LabelFor(model => model.UserName, "Username")*@
+                            <p>User ID</p>
+                            @Html.TextBoxFor(model => model.UserId, new { @class = "form-control", style = "border: none;   outline: none; color:white", Value = @Model.UserId })
+                            @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+
+
+                        </div>
+                        <div class="form-floating mb-3">
+                            @*@Html.LabelFor(model => model.UserName, "Username")*@
+                            <p>UserName</p>
+                            @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", style = "border: none;   outline: none; color:white", Value = @Model.UserName })
+                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+
+
+                        </div>
+                      
+                        <div class="form-floating mb-4">
+                            @*@Html.LabelFor(model => model.UserName, "EmailAddress")*@
+                            <p>Email address</p>
+                            @Html.TextBoxFor(model => model.EmailAddress, new { @class = "form-control", style = "border: none;   outline: none;color:white", placeholder = "EmailAddress", Value = @Model.EmailAddress })
+                            @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
+
+
+
+                        </div>
+                       
+                        <button type="submit" class="btn btn-primary py-3 w-100 mb-4">DELETE</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Sign In End -->
+    </div>
+}

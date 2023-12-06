@@ -1,0 +1,54 @@
+﻿@model PhamMinhNhut_DoAnWeb.Models.User
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutPage4.cshtml";
+}
+
+
+@using (Html.BeginForm("Login", "User", FormMethod.Post))
+{
+
+    <div class="container">
+        <div class="screen">
+            <div class="screen__content">
+
+                <div class="login__field">
+                    <div class="login__input">
+                    
+                        @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", style = "border: none;   outline: none;", placeholder = "UserName" })
+                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                    </div>
+                    </div>
+                <div class="login__field">
+                    
+                    <div class="login__input">
+                        @Html.TextBoxFor(model => model.Password, new { @class = "form-control", type = "password", style = "border: none;   outline: none;", placeholder = "Password" })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+
+                    </div>
+
+                </div>
+                    <button class="button login__submit">
+                        <span class="button__text">Log In Now</span>
+                        <i class="button__icon fas fa-chevron-right"></i>
+                    </button>
+
+                    <div class="social-login">
+                        <a href="Register"><h3>Sign up</h3></a>
+                        <div class="social-icons">
+                            <a href="#" class="social-login__icon fab fa-instagram"></a>
+                            <a href="#" class="social-login__icon fab fa-facebook"></a>
+                            <a href="#" class="social-login__icon fab fa-twitter"></a>
+                        </div>
+                    </div>
+                </div>
+            <div class="screen__background">
+                <span class="screen__background__shape screen__background__shape4"></span>
+                <span class="screen__background__shape screen__background__shape3"></span>
+                <span class="screen__background__shape screen__background__shape2"></span>
+                <span class="screen__background__shape screen__background__shape1"></span>
+            </div>
+        </div>
+    </div>
+
+}

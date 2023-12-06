@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <style>
+        body {
+            position: relative;
+            background-image: url("/Images/2.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            backdrop-filter: blur(10px); /* Điều chỉnh độ mờ ở đây */
+        }
+
+            body::before {
+                content: "";
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5); /* Màu đen với độ mờ 0.5 */
+                z-index: -1; /* Đảm bảo lớp nền đen nằm sau background chính */
+            }
+
+        .nav-menu {
+            position: absolute;
+            z-index: 100;
+            left: 0;
+            right: 0;
+            width: 100%;
+            display: flex;
+            height: auto;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .nav-menu img {
+                margin-left: 40px;
+                width: 90px;
+                height: 90px;
+            }
+            /* .nav-menu img:hover{
+          transition: 0.5s ease-in-out;
+          transform: scale(1.1, 1.1);
+        } */
+
+            .nav-menu a {
+                color: white;
+                text-decoration: none;
+            }
+
+            /* .nav-menu a:hover {
+          color: orange;
+        }  */
+
+            .nav-menu ul {
+                display: flex;
+                list-style: none;
+            }
+
+                .nav-menu ul li {
+                    position: relative;
+                    text-align: center;
+                    padding: 14px 25px;
+                    transition: 0.5s;
+                }
+
+                    /* .nav-menu ul li:hover {
+          color: orange;
+          transform: scale(1.3, 1.3);
+        }  */
+
+                    .nav-menu ul li > .sub_menu {
+                        position: absolute;
+                        top: 100%;
+                        left: 0;
+                        display: none;
+                    }
+
+                    .nav-menu ul li:hover > .sub_menu {
+                        display: block;
+                        color: white;
+                        background-color: black;
+                        border: 1px solid white;
+                        border-radius: 10px;
+                        font-size: 11px;
+                        font-weight: 200;
+                    }
+
+        .font-nav-menu {
+            font-size: 22px;
+            font-weight: 700;
+            margin: 10px 0 0 0;
+        }
+
+        .nav-menu.sticky {
+            position: sticky;
+            height: auto;
+            top: 0;
+            background-color: white;
+            opacity: 0.9;
+        }
+
+            .nav-menu.sticky ul li a {
+                color: black;
+            }
+
+            .nav-menu.sticky ul li > .sub_menu {
+                padding-top: 20px;
+                border-radius: 10;
+            }
+
+        .nav-menu.nav-menu.sticky ul li:hover > .sub_menu {
+            color: black;
+            background-color: white;
+            font-weight: 500;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(window).scroll(function () {
+                if ($(this).scrollTop()) {
+                    $('.nav-menu').addClass('sticky');
+                } else {
+                    $('.nav-menu').removeClass('sticky');
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+    <div class="nav-menu">
+        <a href="Trangchu.html">
+            <img src="~/Images/AVATA_remove.png" style=" width: 50px; height: 50px;" ></img>
+        </a>
+        <ul class="font-nav-menu">
+            <li><a href="/home">Home</a></li>
+            <li>
+                <a href="">Danh sách Brand</a>
+                @*<ul class="sub_menu">
+                        <li><a href="#bac">Miền Bắc</a></li>
+                        <li><a href="#trung">Miền Trung</a></li>
+                        <li><a href="#nam">Miền Nam</a></li>
+                    </ul>*@
+            </li>
+            <li><a href="/Home/Product">Danh sách xe</a></li>
+        </ul>
+
+    </div>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>

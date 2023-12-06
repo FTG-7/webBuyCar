@@ -1,0 +1,51 @@
+﻿@model List<PhamMinhNhut_DoAnWeb.Models.Carts>
+@{
+    ViewBag.Title = "Giỏ hàng";
+    Layout = "~/Views/Shared/_LayoutPage4.cshtml";
+}
+
+<h2>Cart</h2>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<a href="~/Home/Product">Home</a>
+<table class="table table-bordered">
+    <tr>
+        <th>STT</th>
+        <th>Tên</th>
+        <th>Số Lượng</th>
+        <th>Tổng Tiền</th>
+    </tr>
+    @{
+        int i = 1;
+        int allPrice = 0;
+    }
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @i
+            </td>
+            <td>@Html.DisplayFor(model => item.Product.ProductName)</td>
+            @*<td>@Html.DisplayFor(model => item.Quantity)</td>*@
+        <td>
+            @using (Html.BeginForm("UpdateQuantity", "Cart", FormMethod.Get))
+            {
+                <input type="number" value="@item.Quantity" name="quan" min="1" style="width:60px"/>
+                <input type="hidden" name="proid" value="@item.ProductID" />
+                <input type="submit" value="Cập nhật" class="btn btn-danger"/>
+            }
+        </td>
+            <td>
+                @{
+                        int Price = item.Product.Price * item.Quantity;
+                    allPrice += Price;
+                    i++;
+                }
+                @Price VND
+            </td>
+        </tr>
+    }
+    <tr>
+        <td colspan="3" class="text-center"> Tổng Tiền</td>
+        <td>@allPrice.ToString("N0") VND</td>
+    </tr>
+</table>

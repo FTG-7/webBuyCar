@@ -1,0 +1,158 @@
+﻿@model List<PhamMinhNhut_DoAnWeb.Models.Product>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutPage1.cshtml";
+}
+
+
+
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-secondary text-center rounded p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h6 class="mb-0">Recent Salse</h6>
+            <a href="~/home/Create">Create</a>
+        </div>
+        <div class="table-responsive">
+            <table class="table text-start align-middle table-bordered table-hover mb-0">
+                <thead>
+                    <tr class="text-white">
+                        <th scope="col"></th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Brand</th>
+                        <th scope="col">Body Type</th>
+                        <th scope="col">Transmission Type</th>
+                        <th scope="col">Power</th>
+                        <th scope="col">Fule</th>
+                        <th scope="col">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td><input class="form-check-input" type="checkbox"></td>
+                            <td>@item.ProductName</td>
+                            <td>@item.Brand.BrandName</td>
+                            <td>@item.BodyType</td>
+                            <td>@item.TransmissionType</td>
+                            <td>@item.Power</td>
+                            <td>@item.Fuel</td>
+                            <td>@item.Price</td>
+                            <td><a class="btn btn-sm btn-primary" href="~/home/detail/@item.ProductID">Detail</a></td>
+                            <td><a class="btn btn-sm btn-primary" href="~/home/Delete/@item.ProductID">Delete</a></td>
+                            <td><a class="btn btn-sm btn-primary" href="~/home/Edit/@item.ProductID">Edit</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- Widgets Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-sm-12 col-md-6 col-xl-4">
+            <div class="h-100 bg-secondary rounded p-4">
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                    <h6 class="mb-0">List Brands</h6>
+                    <a href="">Show All</a>
+                </div>
+                <div class="d-flex mb-2">
+                    <input class="form-control bg-dark border-0" type="text" placeholder="Enter task">
+                    <button type="button" class="btn btn-primary ms-2">Add</button>
+                </div>
+                @foreach (var itm in @ViewBag.Brands)
+                {
+                    
+                    <div class="d-flex align-items-center border-bottom py-2">
+                        <input class="form-check-input m-0" type="checkbox">
+                        <div class="w-100 ms-3">
+                            <div class="d-flex w-100 align-items-center justify-content-between">
+                                <span>@itm.BrandName</span>
+                                <button class="btn btn-sm"><i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            
+
+                <div class="d-flex align-items-center pt-2">
+                    <input class="form-check-input m-0" type="checkbox">
+                    <div class="w-100 ms-3">
+                        <div class="d-flex w-100 align-items-center justify-content-between">
+                            <span>Short task goes here...</span>
+                            <button class="btn btn-sm"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-xl-4">
+            <div class="h-100 bg-secondary rounded p-4">
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                    <h6 class="mb-0">Calender</h6>
+                    <a href="">Show All</a>
+                </div>
+                <div id="calender"></div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-xl-4">
+            <div class="h-100 bg-secondary rounded p-4">
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                    <h6 class="mb-0">To Do List</h6>
+                    <a href="">Show All</a>
+                </div>
+                <div class="d-flex mb-2">
+                    <input class="form-control bg-dark border-0" type="text" placeholder="Enter task">
+                    <button type="button" class="btn btn-primary ms-2">Add</button>
+                </div>
+                <div class="d-flex align-items-center border-bottom py-2">
+                    <input class="form-check-input m-0" type="checkbox">
+                    <div class="w-100 ms-3">
+                        <div class="d-flex w-100 align-items-center justify-content-between">
+                            <span>Short task goes here...</span>
+                            <button class="btn btn-sm"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center border-bottom py-2">
+                    <input class="form-check-input m-0" type="checkbox">
+                    <div class="w-100 ms-3">
+                        <div class="d-flex w-100 align-items-center justify-content-between">
+                            <span>Short task goes here...</span>
+                            <button class="btn btn-sm"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center border-bottom py-2">
+                    <input class="form-check-input m-0" type="checkbox" checked>
+                    <div class="w-100 ms-3">
+                        <div class="d-flex w-100 align-items-center justify-content-between">
+                            <span><del>Short task goes here...</del></span>
+                            <button class="btn btn-sm text-primary"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center border-bottom py-2">
+                    <input class="form-check-input m-0" type="checkbox">
+                    <div class="w-100 ms-3">
+                        <div class="d-flex w-100 align-items-center justify-content-between">
+                            <span>Short task goes here...</span>
+                            <button class="btn btn-sm"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center pt-2">
+                    <input class="form-check-input m-0" type="checkbox">
+                    <div class="w-100 ms-3">
+                        <div class="d-flex w-100 align-items-center justify-content-between">
+                            <span>Short task goes here...</span>
+                            <button class="btn btn-sm"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Widgets End -->

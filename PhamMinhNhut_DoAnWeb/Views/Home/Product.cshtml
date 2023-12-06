@@ -1,0 +1,489 @@
+﻿
+@model List<PhamMinhNhut_DoAnWeb.Models.Product>
+@{
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/product.css">
+<link rel="stylesheet" href="~/css/dropdown.css">
+<link href="/your-path-to-fontawesome/css/all.css" rel="stylesheet"> <!--load all styles -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-e2BBm5Mz9ATKxIepYihdlzU2SvXMGLpWlS8UfOxCIq8GG5Fkfr5mp9LVxl5WUKZU" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-e2BBm5Mz9ATKxIepYihdlzU2SvXMGLpWlS8UfOxCIq8GG5Fkfr5mp9LVxl5WUKZU" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:400,700&amp;display=swap">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arvo&amp;display=swap">
+<style>
+    .nav-menu ul li:hover > .sub_menu {
+        color: black;
+    }
+
+    body {
+        background-color: #E2E8F0;
+    }
+
+    .hover-effect:hover {
+        box-shadow: 5px 5px 5px rgb(201, 199, 199);
+    }
+
+    .card {
+        position: relative;
+        padding: 42px 32px;
+        margin-top: 200px;
+        clip-path: circle(5% at 95% 11%);
+        transition: all ease-in-out 0.3s;
+        background-color: #E2E8F0;
+        z-index: 1;
+        color: black;
+    }
+
+    .card__infoicon {
+        position: absolute;
+        top: 10px;
+        right: 33px;
+        font-size: 1.4em;
+        color: #000000;
+        transition: ease-out 0.3s;
+    }
+
+    .card__title {
+        margin: 0;
+        font-size: 3em;
+        line-height: 1.8;
+    }
+
+    .card__description {
+        margin: 0;
+        font-size: 1.1em;
+        line-height: 1.6;
+    }
+
+    .card__credits {
+        margin: 0;
+        padding: 4px 0;
+        font-size: 1.1em;
+    }
+
+    .card__reference {
+        display: inline-block;
+        border-bottom: 1px solid transparent;
+        color: #0099ff;
+        text-decoration: none;
+        transition: ease-in 0.3s;
+    }
+
+        .card__reference:hover {
+            border-bottom-color: #0099ff;
+        }
+
+    .card:hover,
+    .card:focus {
+        clip-path: circle(75%);
+        border-radius: 20px;
+        box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.12), 0px 3px 18px rgba(0, 0, 0, 0.08);
+        background: #ffffff;
+        outline: none;
+    }
+
+    .card:focus {
+        box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.12), 0px 3px 18px rgba(0, 0, 0, 0.08), 0px 0px 0px 4px rgba(0, 0, 0, 0.2);
+    }
+</style>
+<style>
+    .search-box {
+        position: relative;
+        width: 90%;
+        margin: 10px;
+        max-width: 360px;
+        height: 60px;
+        border-radius: 120px;
+        margin: 0 auto;
+    }
+
+    .search-icon, .go-icon {
+        position: absolute;
+        top: 0;
+        height: 60px;
+        width: 86px;
+        line-height: 61px;
+        text-align: center;
+    }
+
+    .search-icon {
+        left: 0;
+        pointer-events: none;
+        font-size: 1.22em;
+        will-change: transform;
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+        -moz-transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+        transform-origin: center center;
+        -webkit-transform-origin: center center;
+        -moz-transform-origin: center center;
+        -o-transform-origin: center center;
+        transition: transform 400ms 220ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
+        -webkit-transition: transform 400ms 220ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
+        -moz-transition: transform 400ms 220ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
+        -o-transition: transform 400ms 220ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
+    }
+
+    .si-rotate {
+        transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+    }
+
+    .go-icon {
+        right: 0;
+        pointer-events: none;
+        font-size: 1.38em;
+        will-change: opacity;
+        cursor: default;
+        opacity: 0;
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+        -o-transform: rotate(45deg);
+        transition: opacity 190ms ease-out, transform 260ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
+        -webkit-transition: opacity 190ms ease-out, transform 260ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
+        -moz-transition: opacity 190ms ease-out, transform 260ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
+        -o-transition: opacity 190ms ease-out, transform 260ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
+    }
+
+    .go-in {
+        opacity: 1;
+        pointer-events: all;
+        cursor: pointer;
+        transform: rotate(0);
+        -webkit-transform: rotate(0);
+        -moz-transform: rotate(0);
+        -o-transform: rotate(0);
+        transition: opacity 190ms ease-out, transform 260ms 20ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
+        -webkit-transition: opacity 190ms ease-out, transform 260ms 20ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
+        -moz-transition: opacity 190ms ease-out, transform 260ms 20ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
+        -o-transition: opacity 190ms ease-out, transform 260ms 20ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
+    }
+
+    .search-border {
+        display: block;
+        width: 100%;
+        max-width: 360px;
+        height: 60px;
+    }
+
+    .border {
+        fill: none;
+        stroke: #FFFFFF;
+        stroke-width: 5;
+        stroke-miterlimit: 10;
+    }
+
+    .border {
+        stroke-dasharray: 740;
+        stroke-dashoffset: 0;
+        transition: stroke-dashoffset 400ms cubic-bezier(0.600, 0.040, 0.735, 0.990);
+        -webkit-transition: stroke-dashoffset 400ms cubic-bezier(0.600, 0.040, 0.735, 0.990);
+        -moz-transition: stroke-dashoffset 400ms cubic-bezier(0.600, 0.040, 0.735, 0.990);
+        -o-transition: stroke-dashoffset 400ms cubic-bezier(0.600, 0.040, 0.735, 0.990);
+    }
+
+    .border-searching .border {
+        stroke-dasharray: 740;
+        stroke-dashoffset: 459;
+        transition: stroke-dashoffset 650ms cubic-bezier(0.755, 0.150, 0.205, 1.000);
+        -webkit-transition: stroke-dashoffset 650ms cubic-bezier(0.755, 0.150, 0.205, 1.000);
+        -moz-transition: stroke-dashoffset 650ms cubic-bezier(0.755, 0.150, 0.205, 1.000);
+        -o-transition: stroke-dashoffset 650ms cubic-bezier(0.755, 0.150, 0.205, 1.000);
+    }
+
+    #search {
+        font-family: 'Montserrat Alternates', sans-serif;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 120px;
+        border: none;
+        background: rgba(255,255,255,0);
+        padding: 0 68px 0 68px;
+        color: #FFFFFF;
+        font-size: 1.32em;
+        font-weight: 400;
+        letter-spacing: -0.015em;
+        outline: none;
+    }
+
+        #search::-webkit-input-placeholder {
+            color: #FFFFFF;
+        }
+
+        #search::-moz-placeholder {
+            color: #FFFFFF;
+        }
+
+        #search:-ms-input-placeholder {
+            color: #FFFFFF;
+        }
+
+        #search:-moz-placeholder {
+            color: #FFFFFF;
+        }
+
+        #search::-moz-selection {
+            color: #FFFFFF;
+            background: rgba(0,0,0,0.25);
+        }
+
+        #search::selection {
+            color: #FFFFFF;
+            background: rgba(0,0,0,0.25);
+        }
+
+
+</style>
+
+<script>
+    $(document).ready(function () {
+        $("#search").focus(function () {
+            $(".search-box").addClass("border-searching");
+            $(".search-icon").addClass("si-rotate");
+        });
+        $("#search").blur(function () {
+            $(".search-box").removeClass("border-searching");
+            $(".search-icon").removeClass("si-rotate");
+        });
+        $("#search").keyup(function () {
+            if ($(this).val().length > 0) {
+                $(".go-icon").addClass("go-in");
+            }
+            else {
+                $(".go-icon").removeClass("go-in");
+            }
+        });
+        $(".go-icon").click(function () {
+            $(".search-form").submit();
+        });
+    });
+</script>
+<script>
+    function setSearchValue() {
+        // Get the value of the search input
+        var searchTerm = document.getElementById("search").value;
+
+        // Set the value of the hidden field
+        document.getElementById("searchHidden").value = searchTerm;
+    }
+</script>
+<div class="row">
+    <div class="col " style="max-width:310px; padding: 0; margin-top: 100px;">
+        <div class="Filter" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 550px; border-radius: 15px; width: auto; background: rgba(154,57,163,1); background: -moz-linear-gradient(-45deg, rgba(154,57,163,1) 0%, rgba(65,103,168,1) 100%); background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(154,57,163,1)), color-stop(100%, rgba(65,103,168,1))); background: -webkit-linear-gradient(-45deg, rgba(154,57,163,1) 0%, rgba(65,103,168,1) 100%); background: -o-linear-gradient(-45deg, rgba(154,57,163,1) 0%, rgba(65,103,168,1) 100%); background: -ms-linear-gradient(-45deg, rgba(154,57,163,1) 0%, rgba(65,103,168,1) 100%); background: linear-gradient(135deg, rgba(154,57,163,1) 0%, rgba(65,103,168,1) 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9a39a3', endColorstr='#4167a8', GradientType=1 ); ">
+            @*<form class="search-box">
+            <input type="text" id="search" name="search" placeholder="">
+            <button type="search"></button>
+        </form>*@
+            <div class="search-box">
+                <div class="search-icon"><i class="fa fa-search search-icon" style="color:white"></i></div>
+                <form action="~/Home/Product" class="search-form" onsubmit="setSearchValue()" style="text-align: center;">
+                    <input type="text" placeholder="Search" id="search" autocomplete="off">
+                    <input type="hidden" id="searchHidden" name="search" value="">
+
+                </form>
+                <svg class="search-border" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px" viewBox="0 0 671 111" style="enable-background:new 0 0 671 111;"
+                     xml:space="preserve">
+                <path class="border" d="M335.5,108.5h-280c-29.3,0-53-23.7-53-53v0c0-29.3,23.7-53,53-53h280" />
+                <path class="border" d="M335.5,108.5h280c29.3,0,53-23.7,53-53v0c0-29.3-23.7-53-53-53h-280" />
+            </svg>
+                <div class="go-icon"><i class="fa fa-arrow-right"></i></div>
+            </div>
+
+            @using (Html.BeginForm("Product", "Home", FormMethod.Get, new { id = "myform" }))
+            {
+                <p>
+                    @Html.DropDownList("SortColumn", new SelectList(new List<SelectListItem>
+               {
+                   new SelectListItem{Text = "Sắp xếp Price",Value="Price"},
+                   new SelectListItem{Text = "Sắp xếp theo Power",Value="Power"}
+
+               }, "Value", "Text"), "Chọn cách sắp xếp")
+                </p>
+            }
+            <script>
+                $(function () {
+                    $('#SortColumn').change(function () {
+                        $('#myform').submit();
+                    });
+                })
+            </script>
+            @{
+                string iconclass = "";
+                if (ViewBag.Iconclass == "fa-sort-desc")
+                {
+                    iconclass = "fa-sort-asc";
+                }
+                else
+                {
+                    iconclass = "fa-sort-desc";
+                }
+
+            }
+         
+            <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
+
+            <div class="sec-center">
+                <input class="dropdown" type="checkbox" id="dropdown" name="dropdown" />
+                <label class="for-dropdown" for="dropdown">Brand <i class="uil uil-arrow-down"></i></label>
+                <div class="section-dropdown">
+                    <a href="/Home/Product?brandname=null">Tất cả sản phầm <i class="uil uil-arrow-right"></i></a>
+                    @foreach (var n in @ViewBag.BR)
+                    {
+                        <a href="/Home/Product?brandid=@n.BrandID">@n.BrandName <i class="uil uil-arrow-right"></i></a>
+                    }
+
+
+                </div>
+            </div>
+        </div>
+   
+    </div>
+    <div class="col " style=" margin-top: 100px; padding: 0 10px 10px 20px">
+        <div class="hover-effect" style="width: 1080px; background-color: white; height: 70px; border-radius: 15px;; color: #FFFFFF; display: flex;  margin-bottom: 20px; align-items: center; ">
+            <img src="https://carvago.com/_next/image?url=%2Fimages%2Fserp-banner%2Fserp_banner_collapsed.webp&w=96&q=75" style="display: block; height: 100%; border-radius: 15px 0 0 15px;" /> <p style="color: black;margin-left:20px; font-weight: bold; font-size: 24px; margin: 0;  "> How to buy a car online</p>
+            <div class="card" tabindex="0">
+                <span class="card__infoicon">
+                    <i class="fa fa-info"></i>
+                </span>
+                <h1 class="card__title">How to buy a car online</h1>
+                <p class="card__description">Choose from hundreds of thousands of checked cars from reliable manufacturers from all over Europe, with delivery right up to your house.</p>
+                <p class="card__credits">Thanks <a class="card__reference" href="https://www.youtube.com/channel/UCVyRiMvfUNMA1UPlDPzG5Ow">Gary Simon</a> for the inspiration</p>
+            </div>
+        </div>
+
+        @foreach (var item in Model)
+        {
+            <div id="detail_car" style=" box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1); border-radius: 20px; margin: 10px 0 20px 0; background-color: #fdf4f4; width: 1080px; height: auto;">
+
+                <div class="row">
+                    <div class="col-4 " style="max-width: 310px;">
+                        @*<img src="~/Images/supra-toyota-4k-in-action-6jc446qp9rwcu454_auto_x2.jpg" style="border-radius: 20px 0 0 20px; display: block; width: 280px; height: 220px;" alt="">*@
+                        <div id="carouselExampleControls_@item.ProductID" class="carousel slide" data-ride="carousel" style="border-radius: 20px 0 0 20px; width: 300px; height: 220px; background-color: black ">
+                            <div class="carousel-inner">
+                                @{
+                                    int itemIndex = 0; // Khai báo một biến đếm vị trí của item
+                                }
+                                @foreach (var image in item.ProductImages)
+                                {
+                                    if (itemIndex != 0)
+                                    {
+                                        <div class="carousel-item ">
+                                            <img src="~/Images/@image.ImageUrl" style="border-radius: 20px 0 0 20px; display: block; width: 300px; height: 220px;" alt="">
+                                        </div>
+
+                                    }
+                                    else
+                                    {
+                                        itemIndex++;
+                                        <div class="carousel-item active">
+                                            <img src="~/Images/@image.ImageUrl" style="border-radius: 20px 0 0 20px; display: block; width: 300px; height: 220px;" alt="">
+                                        </div>
+                                    }
+
+
+                                }
+
+
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleControls_@item.ProductID" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleControls_@item.ProductID" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col " style="height: auto;">
+                        <div class="name"><h1 style="margin:0;margin-top:10px">@item.ProductName</h1></div>
+                        <div class=" info_car" style="display: grid; grid-template-columns: repeat(3,1fr);row-gap: 0.5rem;">
+                            <div class="properties"><i class="fas fa-paint-roller"></i> @item.BodyColor</div>
+                            <div class="properties"><i class="fas fa-car"></i> @item.BodyType</div>
+                            <div class="properties"><i class="fas fa-cogs"></i> @item.TransmissionType</div>
+                            <div class="properties"><i class="fas fa-tachometer-alt"></i> @item.Consumption</div>
+                            <div class="properties">  <i class="fas fa-gas-pump"></i>  @item.Power   </div>
+                            <div class="properties">
+                                <i class="fas fa-gas-pump"></i>   @item.Fuel
+                            </div>
+                        </div>
+                        <div class="more" style="background-color: aqua; margin: 0 10px 0 10px; border-bottom: 2px solid #000;"></div>
+                        <div style="display:flex">
+                            <section class="buttons" style="margin:10px; width:140px;height:40px">
+                                <a href="~/home/detail/@item.ProductID" class="btn btn-5">@item.Price$</a>
+                            </section>
+                            @*<section class="buttons" style="margin:10px; width:140px;height:40px">
+                                    <a href="~/home/Delete/@item.ProductID" class="btn btn-5">Delete</a>
+                                </section>*@
+                            @*<section class="buttons" style="margin:10px; width:140px;height:40px">
+                                    <a href="   " class="btn btn-5">Edit</a>
+                                </section>*@
+                            <section class="buttons" style="margin:10px; width:140px;height:40px">
+                                <a href="~/Cart/Add/@item.ProductID" class="btn btn-5">Thêm Giỏ Hàng</a>
+                            </section>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }
+
+        <tr>
+            <td colspan="9">
+                @{
+                    int PrevPage = ViewBag.Page - 1;
+                    if (PrevPage <= 0)
+                    {
+                        PrevPage = 1;
+                    }
+                    int NextPage = ViewBag.Page + 1;
+                    if (NextPage > ViewBag.NoOfPage)
+                    {
+                        NextPage = ViewBag.NoOfPage;
+                    }
+                }
+                <ul class=" pagination justify-content-center">
+                    <li class="page-item">
+                        <a class="page-link" href="/Home/Product?SortColumn=@ViewBag.SortColumn&Iconclass=@ViewBag.Iconclass&page=@PrevPage">Prev</a>
+                    </li>
+                    @for (int i = 0; i < ViewBag.NoOfPage; i++)
+                    {
+                        if (i + 1 == ViewBag.Page)
+                        {
+                            <li class="page-item active">
+                                <a class="page-link" href="/Home/Product?SortColumn=@ViewBag.SortColumn&Iconclass=@ViewBag.Iconclass&page=@(i+1)">@(i+1)</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="/Home/Product?SortColumn=@ViewBag.SortColumn&Iconclass=@ViewBag.Iconclass&page=@(i+1)">@(i+1)</a>
+                            </li>
+                        }
+
+                    }
+                    <li class="page-item">
+                        <a class="page-link" href="/Home/Product?SortColumn=@ViewBag.SortColumn&Iconclass=@ViewBag.Iconclass&page=@NextPage">Next</a>
+                    </li>
+
+                </ul>
+            </td>
+        </tr>
+    </div>
+
+</div>
+
